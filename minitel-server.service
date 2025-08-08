@@ -1,0 +1,14 @@
+[Unit]
+Description=Minitel Server
+After=network.target asterisk.service
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/src/minitel-server
+ExecStart=MinitelServer.py
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
