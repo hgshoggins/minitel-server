@@ -35,17 +35,17 @@ class Page(object):
         if name is None:
             self.name = str(service)
             self.fullname = ''
-            self.page_folder = os.path.join(Configuration.page_folder, str(self.service))
+            self.pages_folder = os.path.join(Configuration.pages_folder, str(self.service))
         else:
             tokens = name.split('.')
             self.fullname = name
             self.name = tokens[len(tokens) - 1]
-            self.page_folder = os.path.join(Configuration.page_folder, str(self.service))
+            self.pages_folder = os.path.join(Configuration.pages_folder, str(self.service))
             for x in range(len(tokens)):
-                self.page_folder = os.path.join(self.page_folder, tokens[x])
-        logger.debug("Minitel page folder is {}".format(self.page_folder))
+                self.pages_folder = os.path.join(self.pages_folder, tokens[x])
+        logger.debug("Minitel page folder is {}".format(self.pages_folder))
         # Load page configuration from its yaml
-        page_file = os.path.join(self.page_folder, self.name + '.yaml')
+        page_file = os.path.join(self.pages_folder, self.name + '.yaml')
         try:
             with open(page_file) as f:
                 data = yaml.load(f, Loader=yaml.FullLoader)
@@ -59,11 +59,11 @@ class Page(object):
 
     def get_page_data(self):
         """ Get page VTX data file """
-        file_path = os.path.join(self.page_folder, self.name + '.vdt')
+        file_path = os.path.join(self.pages_folder, self.name + '.vdt')
         if os.path.exists(file_path):
             return file_path
 
-        file_path = os.path.join(self.page_folder, self.name + '.vtx')
+        file_path = os.path.join(self.pages_folder, self.name + '.vtx')
         if os.path.exists(file_path):
             return file_path
 
