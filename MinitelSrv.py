@@ -48,7 +48,7 @@ def main():
 
     # Run the server
     ports = []
-    for dirName in next(os.walk(Configuration.page_folder))[1]:
+    for dirName in next(os.walk(Configuration.pages_folder))[1]:
         logger.info("Searching service in " + dirName)
         try:
             ports.append(int(dirName))

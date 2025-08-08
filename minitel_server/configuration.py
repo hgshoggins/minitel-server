@@ -15,7 +15,7 @@ logger = logging.getLogger('page')
 
 class Configuration(object):
     PAGE_LOCATION = 'pages'
-    page_folder = '.'
+    pages_folder = '.'
 
     @staticmethod
     def load_configuration():
@@ -25,12 +25,12 @@ class Configuration(object):
                 if data is None:
                     return
                 # Gets page location
-                page_folder = data.get('pages_folder', None)
-                if page_folder is not None:
-                    Configuration.page_folder = page_folder
-                    sys.path.append(page_folder)
+                pages_folder = data.get('pages_folder', None)
+                if pages_folder is not None:
+                    Configuration.pages_folder = pages_folder
+                    sys.path.append(pages_folder)
         except FileNotFoundError:
             logger.warning("Configuration file not found.")
 
-        Configuration.page_folder = os.path.join(Configuration.page_folder, Configuration.PAGE_LOCATION)
-        logger.info("Pages stored in {} : ".format(Configuration.page_folder))
+        Configuration.pages_folder = os.path.join(Configuration.pages_folder, Configuration.PAGE_LOCATION)
+        logger.info("Pages stored in {} : ".format(Configuration.pages_folder))
