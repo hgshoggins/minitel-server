@@ -1,0 +1,3 @@
+handler: HandlerCo2
+forms:
+    - location: [0, 0]
