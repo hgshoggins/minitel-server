@@ -42,14 +42,14 @@ class Handler3615(PageHandler):
             key = self.minitel.wait_form_inputs()
 
             if key == Terminal.ENVOI:
-                logger.debug("Envoi from {}".format(self.context.current_page.page_folder))
+                logger.debug("Envoi from {}".format(self.context.current_page.pages_folder))
                 nextpage = self.getpage(self.minitel.forms[0].text)
                 if nextpage is not None:
                     return PageContext(self, nextpage)
                 else:
                     self.shownotfound()
             if key == Terminal.GUIDE:
-                logger.debug("Guide from {}".format(self.context.current_page.page_folder))
+                logger.debug("Guide from {}".format(self.context.current_page.pages_folder))
                 return self.showavailableservice()
             if key == Terminal.SOMMAIRE:
                 return self.showprice()
@@ -61,7 +61,7 @@ class Handler3615(PageHandler):
         ''' Gets a new page if found in child folder '''
         name = name.lower()
         next_page = None
-        for dirName in next(os.walk(self.context.current_page.page_folder))[1]:
+        for dirName in next(os.walk(self.context.current_page.pages_folder))[1]:
             if dirName.lower() == name:
                 logger.debug("Found page {}".format(name))
                 next_page = Page.get_page(self.context.current_page.service, name)
@@ -93,7 +93,7 @@ class Handler3615(PageHandler):
         i = 0
         x = 1
         pagesnum = []
-        for dirName in next(os.walk(self.context.current_page.page_folder))[1]:
+        for dirName in next(os.walk(self.context.current_page.pages_folder))[1]:
             if not dirName.startswith('_'):
                 self.minitel.move_cursor(x, 4 + i)
                 pagesnum.append(dirName)

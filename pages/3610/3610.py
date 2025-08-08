@@ -27,7 +27,7 @@ class HandlerDemo(DefaultPageHandler):
         super().__init__(minitel, context)
 
     def after_rendering(self):
-        vdt_folder = os.path.join(self.context.current_page.page_folder, 'vdts', '*.vdt')
+        vdt_folder = os.path.join(self.context.current_page.pages_folder, 'vdts', '*.vdt')
         vdt_files = glob.glob(vdt_folder)
         logger.info(f'Found {len(vdt_files)} files')
         while True:
